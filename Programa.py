@@ -31,9 +31,10 @@ def almenta_cobra(lista):
 
 
 def reniciar_jogo():
-    global pontos, comprimento_cobra, VELOCIDADE, x_cobra, y_cobra, appleY, appleX, Morreu
+    global pontos, comprimento_cobra, VELOCIDADE, x_cobra, y_cobra, appleY, appleX, Morreu, cor_da_tela
     pos_cobra.clear()
     cabeça_cobra.clear()
+    cor_da_tela = (0, 0, 0)
     pontos = 0
     comprimento_cobra = 5
     VELOCIDADE = 10
@@ -50,6 +51,8 @@ altura = 600
 
 tela = pygame.display.set_mode((largura, altura))
 pygame.display.set_caption('Python Cobra')
+
+cor_da_tela = (0, 0, 0)
 
 # Musica de fundo
 
@@ -76,14 +79,14 @@ Morreu = False
 
 # maçã
 
-appleX = aleatorioDecimal(20, largura-40)
-appleY = aleatorioDecimal(20, altura-40)
+appleX = aleatorioDecimal(40, largura-40)
+appleY = aleatorioDecimal(40, altura-40)
 
 # Parede
 parede_Tam = 10
 parede_Spaco = 100
-# Movimento
 
+# Movimento
 VELOCIDADE = 3
 FPS = 120
 
@@ -106,18 +109,22 @@ cor_dos_pontos = (20, 245, 102)
 
 pontos = 0
 while True:
-    tela.fill((0, 0, 0))
+    tela.fill(cor_da_tela)
     Clock.tick(FPS)
 
     # Marcador de pontos
     if pontos == 10:
         cor_dos_pontos = (200, 245, 20)
+        cor_da_tela = (30, 30, 0)
     elif pontos == 20:
         cor_dos_pontos = (255, 20, 20)
+        cor_da_tela = (30, 0, 0)
     elif pontos == 25:
         cor_dos_pontos = (200, 85, 200)
+        cor_da_tela = (30, 0, 30)
     elif pontos == 30:
         cor_dos_pontos = (255, 0, 255)
+        cor_da_tela = (50, 20, 50)
     txt_Formatado = font_pontos.render(f'Pontos {pontos}', True, cor_dos_pontos)
 
     # Eventos feitos
@@ -128,6 +135,7 @@ while True:
             pygame.quit()
             exit()
         if event.type == KEYDOWN:
+            # troca movimento
             if movimento != DOWM:
                 if event.key == K_UP:
                     movimento = UP
@@ -140,7 +148,6 @@ while True:
             if movimento != UP:
                 if event.key == K_DOWN:
                     movimento = DOWM
-
 
     # Teclas de movimento
 
@@ -228,23 +235,22 @@ while True:
     if pos_cobra.count(cabeça_cobra) > 1 or Morreu == True:
         reniciar_jogo()
         Morreu = True
+        pygame.mixer.music.stop()
+        Musica_derrota.play()
         while Morreu:
             tela.fill((40, 40, 40))
             fim = font_Derrota.render('     PERDEU', True, (255, 0, 0))
             recomeçar = font_Recomeçar.render('R para Recomeçar', True, (255, 255, 0))
-            pygame.mixer.music.stop()
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
                     exit()
                 if event.type == KEYDOWN:
-                    pygame.mixer.music.play()
                     if event.key == K_r:
+                        pygame.mixer.music.play()
                         Morreu = False
                         VELOCIDADE = 3
                         cor_dos_pontos = (20, 245, 102)
-
-            Musica_derrota.play()
             tela.blit(recomeçar, (largura/2-50, altura/2))
             tela.blit(fim, (0, altura/2-120))
             pygame.display.update()

@@ -108,7 +108,7 @@ font_Derrota = pygame.font.SysFont('Impact', 100, False, False)
 font_Recomeçar = pygame.font.SysFont('arial', 20, True, True)
 cor_dos_pontos = (20, 245, 102)
 
-pontos = 0
+pontos = 30
 while True:
     tela.fill(cor_da_tela)
     Clock.tick(FPS)
@@ -125,11 +125,15 @@ while True:
     elif pontos == 25:
         cor_dos_pontos = (200, 85, 200)
         cor_da_tela = (30, 0, 30)
-        parede_cor = (150, 10, 150)
+        parede_cor = (10, 10, 150)
     elif pontos == 30:
         cor_dos_pontos = (255, 0, 255)
         cor_da_tela = (50, 20, 50)
         parede_cor = (255, 0, 255)
+    elif pontos == 40:
+        cor_dos_pontos = (105, 100, 255)
+        cor_da_tela = (55, 55, 55)
+        parede_cor = (105, 100, 255)
     txt_Formatado = font_pontos.render(f'Pontos {pontos}', True, cor_dos_pontos)
 
     # Eventos feitos

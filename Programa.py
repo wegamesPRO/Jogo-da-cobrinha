@@ -85,6 +85,7 @@ appleY = aleatorioDecimal(40, altura-40)
 # Parede
 parede_Tam = 10
 parede_Spaco = 100
+parede_cor = (0, 255, 0)
 
 # Movimento
 VELOCIDADE = 3
@@ -116,15 +117,19 @@ while True:
     if pontos == 10:
         cor_dos_pontos = (200, 245, 20)
         cor_da_tela = (30, 30, 0)
+        parede_cor = (255, 255, 0)
     elif pontos == 20:
         cor_dos_pontos = (255, 20, 20)
         cor_da_tela = (30, 0, 0)
+        parede_cor = (255, 0, 0)
     elif pontos == 25:
         cor_dos_pontos = (200, 85, 200)
         cor_da_tela = (30, 0, 30)
+        parede_cor = (150, 10, 150)
     elif pontos == 30:
         cor_dos_pontos = (255, 0, 255)
         cor_da_tela = (50, 20, 50)
+        parede_cor = (255, 0, 255)
     txt_Formatado = font_pontos.render(f'Pontos {pontos}', True, cor_dos_pontos)
 
     # Eventos feitos
@@ -181,14 +186,14 @@ while True:
     AppleGold = pygame.draw.circle(tela, (205, 201, 0), (-10, -10), 10)
 
     # Paredes
-    parede1x = pygame.draw.line(tela, (0, 255, 0), (0, 0), (largura/2 - parede_Spaco, 0), 10)
-    parede2x = pygame.draw.line(tela, (0, 255, 0), (largura/2 + parede_Spaco, 0), (largura, 0), 10)
-    parede3x = pygame.draw.line(tela, (0, 255, 0), (largura, 0), (largura, altura / 2 - parede_Spaco), 10)
-    parede4x = pygame.draw.line(tela, (0, 255, 0), (largura, altura / 2 + parede_Spaco), (largura, altura), 10)
-    parede1y = pygame.draw.line(tela, (0, 255, 0), (0, 0), (0, altura / 2 - parede_Spaco), 10)
-    parede2y = pygame.draw.line(tela, (0, 255, 0), (0, altura / 2 + parede_Spaco), (0, altura), 10)
-    parede3y = pygame.draw.line(tela, (0, 255, 0), (0, altura), (largura / 2 - parede_Spaco, altura), 10)
-    parede4y = pygame.draw.line(tela, (0, 255, 0), (largura / 2 + parede_Spaco, altura), (largura, altura), 10)
+    parede1x = pygame.draw.line(tela, parede_cor, (0, 0), (largura/2 - parede_Spaco, 0), 10)
+    parede2x = pygame.draw.line(tela, parede_cor, (largura/2 + parede_Spaco, 0), (largura, 0), 10)
+    parede3x = pygame.draw.line(tela, parede_cor, (largura, 0), (largura, altura / 2 - parede_Spaco), 10)
+    parede4x = pygame.draw.line(tela, parede_cor, (largura, altura / 2 + parede_Spaco), (largura, altura), 10)
+    parede1y = pygame.draw.line(tela, parede_cor, (0, 0), (0, altura / 2 - parede_Spaco), 10)
+    parede2y = pygame.draw.line(tela, parede_cor, (0, altura / 2 + parede_Spaco), (0, altura), 10)
+    parede3y = pygame.draw.line(tela, parede_cor, (0, altura), (largura / 2 - parede_Spaco, altura), 10)
+    parede4y = pygame.draw.line(tela, parede_cor, (largura / 2 + parede_Spaco, altura), (largura, altura), 10)
 
     if pontos == 15 or pontos == 30 or pontos == 45:
         AppleGold = pygame.draw.circle(tela, (205, 201, 0), (appleX, appleY), 10)
@@ -251,6 +256,7 @@ while True:
                         Morreu = False
                         VELOCIDADE = 3
                         cor_dos_pontos = (20, 245, 102)
+                        parede_cor = (0, 255, 0)
             tela.blit(recomeçar, (largura/2-50, altura/2))
             tela.blit(fim, (0, altura/2-120))
             pygame.display.update()

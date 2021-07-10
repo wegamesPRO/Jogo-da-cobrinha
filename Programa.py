@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import *
 from sys import exit
 from random import randint
-from time import sleep
 
 pygame.init()
 
@@ -50,22 +49,25 @@ largura = 900
 altura = 600
 
 tela = pygame.display.set_mode((largura, altura))
-pygame.display.set_caption('Python Cobra')
+pygame.display.set_caption('Cobra PY', 'cobra.ico')
+icone = pygame.image.load('cobra.ico')
+pygame.display.set_icon(icone)
+
 
 cor_da_tela = (0, 0, 0)
 
 # Musica de fundo
 
-Musica_fundo = pygame.mixer.music.load('BoxCat_Games_-_Mission.ogg')
+Musica_fundo = pygame.mixer.music.load('musica/BoxCat_Games_-_Mission.ogg')
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(1)
 
 # Musicas de efeitos
-Musica_point = pygame.mixer.Sound('smw_coin.wav')
+Musica_point = pygame.mixer.Sound('sond/smw_coin.wav')
 Musica_point.set_volume(1)
-Musica_point2 = pygame.mixer.Sound('smw_1-up.wav')
+Musica_point2 = pygame.mixer.Sound('sond/smw_1-up.wav')
 Musica_point2.set_volume(1)
-Musica_derrota = pygame.mixer.Sound('smw_game_over.wav')
+Musica_derrota = pygame.mixer.Sound('sond/smw_game_over.wav')
 Musica_derrota.set_volume(1)
 
 
@@ -108,7 +110,7 @@ font_Derrota = pygame.font.SysFont('Impact', 100, False, False)
 font_Recomeçar = pygame.font.SysFont('arial', 20, True, True)
 cor_dos_pontos = (20, 245, 102)
 
-pontos = 30
+pontos = 0
 while True:
     tela.fill(cor_da_tela)
     Clock.tick(FPS)
